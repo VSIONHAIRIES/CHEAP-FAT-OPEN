@@ -3,11 +3,11 @@
 #include <Oscillator.h>
 #include <stdint.h>
 
-class SawOscillator : public Oscillator {
+class OscillatorSAW : public Oscillator {
 public:
 
-	SawOscillator(float freq);
-	~SawOscillator(){}
+	OscillatorSAW();
+	~OscillatorSAW(){}
 
 	void process(int64_t& sample) override;
 	

@@ -22,6 +22,7 @@ AudioDestinationNode_T3DAC::AudioDestinationNode_T3DAC()
 
 void AudioDestinationNode_T3DAC::isr(void) {	
 
+	// Serial.println("enter isr");
 
 	_sample += 32768;
 	analogWrite(A14, _sample>>4);

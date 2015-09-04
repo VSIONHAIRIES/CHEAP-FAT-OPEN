@@ -7,7 +7,7 @@ class Oscillator : public AudioNode {
 public:
 
 	Oscillator();
-	virtual ~Oscillator();
+	virtual ~Oscillator(){}
 
 	// FREQUENCY AND DETUNE FUNCTIONS
 	void setFrequency(float frequency);
@@ -33,7 +33,7 @@ protected:
 	int32_t 		_period;
 	int32_t			_phase;
 	int32_t			_osc;	
-	uint32_t 		_accumulator;
+	int32_t 		_accumulator;
 	int32_t			_index;
 	int64_t			_sample;
 

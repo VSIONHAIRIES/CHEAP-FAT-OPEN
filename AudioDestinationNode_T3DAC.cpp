@@ -1,4 +1,4 @@
-#include "AudioDestinationNode_T3DAC.h"
+#include <AudioDestinationNode_T3DAC.h>
 
 #include <Arduino.h>
 
@@ -27,6 +27,7 @@ void AudioDestinationNode_T3DAC::isr(void) {
 	_sample += 32768;
 	analogWrite(A14, _sample>>4);
 
+	_clock++;
 	_sample = 0;
 
 	// http://fastcpp.blogspot.nl/2011/03/fast-iteration-over-stl-vector-elements.html
@@ -49,6 +50,10 @@ void AudioDestinationNode_T3DAC::isr(void) {
 
 int AudioDestinationNode_T3DAC::sample_rate() {
 	return SAMPLE_RATE;
+}
+
+uint64_t AudioDestinationNode_T3DAC::sample_clock() {
+	return _clock;
 }
 
 void synth_isr() {	

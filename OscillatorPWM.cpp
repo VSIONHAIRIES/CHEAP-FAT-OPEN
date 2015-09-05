@@ -1,7 +1,6 @@
 #include "OscillatorPWM.h"
 
 OscillatorPWM::OscillatorPWM(): Oscillator() {
-
 	_pwm = 4675342;
 }
 

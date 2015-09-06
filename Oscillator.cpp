@@ -19,7 +19,7 @@ Oscillator::Oscillator() : AudioNode() {
 	setPortamento(1);
 	setSemitone(0);
 
-	_gain = 0x7FFFFFFF;  // full gain is 0xFFFFFFF
+	_gain = 0x7FFFFFFF;  // full gain is 0x7FFFFFFF
 
 }
 

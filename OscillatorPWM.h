@@ -15,7 +15,9 @@ public:
 
 	int _pwm;
 
+	AudioNodeOutput* AudioOut;
+	AudioNodeInput* PWMIn;
+
 protected:
 
-	AudioNodeOutput* AudioOut;
 };

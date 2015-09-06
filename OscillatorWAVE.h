@@ -36,8 +36,9 @@ public:
 
 	uint16_t _waveform;
 	uint16_t _indx;
-	
-protected:
 
 	AudioNodeOutput* AudioOut;
+	AudioNodeInput WaveformIn;	
+protected:
+
 };

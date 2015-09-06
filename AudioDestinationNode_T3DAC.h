@@ -15,6 +15,7 @@ public:
 	uint64_t sample_clock() override;
 
 private:
+	int64_t _outputSample;
 	int _accum;
 	uint64_t _clock;
 };

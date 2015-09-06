@@ -9,11 +9,12 @@ AudioNodeOutput::AudioNodeOutput(AudioNode* owner, int* ptr) : AudioNode() {
 
 
 void AudioNodeOutput::connect(AudioNode* destination) {
-
+	_output = destination;
+	destination->hook(this);
 }
 
 void AudioNodeOutput::disconnect(AudioNode* destination) {
-
+	if(destination == _output) destination->unhook(this);
 }
 
 

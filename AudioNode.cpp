@@ -14,6 +14,15 @@ AudioNode::~AudioNode() {
 }
 
 
+bool AudioNode::shouldProcess() {
+	uint64_t clock = _audioCxt->sampleClock();
+	if (_clock < clock) {
+		_clock = clock;
+		return true;
+	}
+	return false;
+}
+
 void AudioNode::connect(AudioNode* destination) {
 	if(std::find(_node_outputs.begin(), _node_outputs.end(), destination) == _node_outputs.end()) {
 		_node_outputs.push_back(destination);

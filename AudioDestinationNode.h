@@ -2,7 +2,7 @@
 
 // http://www.w3.org/TR/webaudio/#AudioDestinationNode
 
-#include "AudioNode.h"
+#include <AudioNode.h>
 
 class AudioDestinationNode : public virtual AudioNode {
 public:
@@ -19,5 +19,7 @@ public:
 	virtual void isr() = 0;
 
 	virtual int sample_rate() = 0;
+
+	virtual uint64_t sample_clock() = 0;
 
 };

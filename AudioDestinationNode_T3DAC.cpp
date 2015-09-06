@@ -1,4 +1,4 @@
-#include "AudioDestinationNode_T3DAC.h"
+#include <AudioDestinationNode_T3DAC.h>
 
 #include <Arduino.h>
 
@@ -26,8 +26,8 @@ void AudioDestinationNode_T3DAC::isr(void) {
 
 	_outputSample += 0x7FFFFFFF; // upper limit of signed 32bit integer to bring it into unsigned int space.
 	analogWrite(A14, _outputSample>>20);
-
 	_outputSample = 0;
+	_clock++;
 
 	// http://fastcpp.blogspot.nl/2011/03/fast-iteration-over-stl-vector-elements.html
 	const int n = _node_inputs.size();
@@ -37,18 +37,14 @@ void AudioDestinationNode_T3DAC::isr(void) {
 		ptr[i]->process(_accum);
 		_outputSample += _accum;
 	}
-
-	// for(unsigned int i = 0; i < _node_inputs.size(); i++) {
-	// 	_node_inputs[i]->process(_accum);
-	// 	_sample += _accum;		
-	// }
-
-	//_sample >>= 18; // hmmm....
-
 }
 
 int AudioDestinationNode_T3DAC::sample_rate() {
 	return SAMPLE_RATE;
+}
+
+uint64_t AudioDestinationNode_T3DAC::sample_clock() {
+	return _clock;
 }
 
 void synth_isr() {	

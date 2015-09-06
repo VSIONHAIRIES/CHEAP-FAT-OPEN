@@ -13,8 +13,8 @@ public:
 	int sample_rate() override; 
 
 private:
-	int64_t _accum;
-	uint64_t outputSample;
+	int _accum;
+	int outputSample;
 
 };
 

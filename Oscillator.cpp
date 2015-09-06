@@ -1,4 +1,4 @@
-#include "Oscillator.h"
+#include <Oscillator.h>
 
 #define BIT_32 4294967296
 #define PERIOD_MAX BIT_32 /// need to move this

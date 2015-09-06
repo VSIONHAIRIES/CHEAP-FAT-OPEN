@@ -4,11 +4,16 @@
 #include <stddef.h>
 #include <stdint.h>
 
+class AudioContext;
+
 class AudioNode {
 public:
 
-	AudioNode() {}
+	AudioNode() : _audioCtx(0) {}
+	AudioNode(AudioContext* audioContext) : _audioCtx(audioContext) {}
 	virtual ~AudioNode();
+
+	inline void set_context(AudioContext* audioContext) { _audioCtx = audioContext; }
 
 	virtual void connect(AudioNode* destination);
 	virtual void disconnect(AudioNode* destination);
@@ -24,6 +29,7 @@ public:
 
 protected:
 	
+	AudioContext*	_audioCtx;
 	std::vector<AudioNode*> _node_inputs;
 	std::vector<AudioNode*> _node_outputs;
 

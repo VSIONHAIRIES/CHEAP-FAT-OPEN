@@ -8,7 +8,7 @@ public:
 	FilterLP6();
 	~FilterLP6(){}
 
-	void process(int64_t& sample) override;
+	void process(int& sample) override;
 
     AudioNodeInput AudioIn;
 	AudioNodeInput Cutoff;

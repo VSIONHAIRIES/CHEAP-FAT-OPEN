@@ -12,10 +12,11 @@ public:
 
 	int sample_rate() override; 
 
+	uint64_t sample_clock() override;
+
 private:
 	int _accum;
-	int outputSample;
-
+	uint64_t _clock;
 };
 
 extern AudioDestinationNode_T3DAC t3dac_destinationNode;

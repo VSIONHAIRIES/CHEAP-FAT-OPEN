@@ -8,6 +8,6 @@ OscillatorSAW::OscillatorSAW(): Oscillator() {
 
 void OscillatorSAW::process() {
 	accumulator();
-	_osc = int((_int64_t(accumulator) * int64_t(_gain)) >> 32);
+	_osc = int((int64_t(_accumulator) * int64_t(_gain)) >> 32);
 }
 

@@ -11,7 +11,7 @@ public:
 	inline void connect(AudioNode* destination) override {}
 	inline void disconnect(AudioNode* destination) override {}
 
-	inline void process(int64_t& sample) override {}
+	inline void process(int& sample) override {}
 
 	inline int nbr_outputs() override { return 0; }
 

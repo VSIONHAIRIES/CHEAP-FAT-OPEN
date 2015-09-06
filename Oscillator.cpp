@@ -78,7 +78,7 @@ void Oscillator::setPortamento(int32_t port) {
 void Oscillator::setGain(float gain){
 	if(gain < -1.0f) _gain = -0x80000000;
 	else if(gain > 1.0f) _gain = 0x7FFFFFFF;
-	else _gain = int((gain * 0x7FFFFFFF) >> 32;
+	else _gain = int(int64_t(gain * 0x7FFFFFFF) >> 32);
 }
 
 

@@ -5,7 +5,7 @@ AudioNodeInput::AudioNodeInput() : AudioNode() {
 	_value = 0;
 }
 
-void AudioNodeInput::process(int64_t& sample) {
+void AudioNodeInput::process(int& sample) {
 	_value = 0;
 	if(_input != NULL) {
 		_input->process(_value);

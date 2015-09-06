@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Oscillator.h>
+#include <AudioNodeInput.h>
+#include <AudioNodeOutput.h>
 #include <stdint.h>
 
 class OscillatorPWM : public Oscillator {
@@ -15,5 +17,5 @@ public:
 
 protected:
 
-
+	AudioNodeOutput* AudioOut;
 };

@@ -20,9 +20,11 @@ FilterLP6::FilterLP6() : Filter() {
 	_cutoffModAmount = 0;
 }
 
-void FilterLP6::process(int64_t& sample) {
+void FilterLP6::process(int& sample) {
 
-	AudioIn.process(_x0);
+	int v;
+	AudioIn.process(v);
+	_x0 = v;
 	// Cutoff.process(_cutoff);
 	// CutoffModAmount.process(_cutoffModAmount);
 	// CutoffModSource.process(_cutoffModSource);

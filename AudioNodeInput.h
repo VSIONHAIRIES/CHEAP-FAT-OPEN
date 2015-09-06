@@ -10,7 +10,7 @@ public:
 	void connect(AudioNode* destination) override {}
 	void disconnect(AudioNode* destination) override {}
 
-	void process(int64_t& sample) override;
+	void process(int& sample) override;
 
 	int nbr_inputs() override {return 1;}
 	int nbr_outputs() override {return 0;}
@@ -24,6 +24,6 @@ public:
 
 protected:
 	
-	AudioNode* _input;
-	int64_t _value;
+	AudioNode* 	_input;
+	int 		_value;
 };

@@ -34,4 +34,5 @@ protected:
 	std::vector<AudioNode*> _node_outputs;
 
 	int _sample;
+	uint64_t _clock;
 };

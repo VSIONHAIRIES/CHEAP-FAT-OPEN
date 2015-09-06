@@ -18,9 +18,7 @@ Oscillator::Oscillator() : AudioNode() {
 	setBend(0.0f);
 	setPortamento(1);
 	setSemitone(0);
-
-	_gain = 0x7FFFFFFF;  // full gain is 0x7FFFFFFF
-
+	setGain(1.0f);
 }
 
 
@@ -76,13 +74,13 @@ void Oscillator::setPortamento(int32_t port) {
 
 // GAIN FUNCTIONS
 void Oscillator::setGain(float gain){
-	if(gain < -1.0f) _gain = -0x80000000;
-	else if(gain > 1.0f) _gain = 0x7FFFFFFF;
-	else _gain = int(int64_t(gain * 0x7FFFFFFF) >> 32);
+	if(gain < -1.0f) _gain = SIGNED_BIT_32_LOW;
+	else if(gain > 1.0f) _gain = SIGNED_BIT_32_HIGH;
+	else _gain = int(int64_t(gain * SIGNED_BIT_32_HIGH));
 }
 
 
 float Oscillator::getGain() {
-	return float(_gain)/0x7FFFFFFF;
+	return float(_gain)/SIGNED_BIT_32_HIGH;
 }        
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <AudioNode.h>
+#include <AudioNodeInput.h>
+#include <AudioNodeOutput.h>
 #include <stdint.h>
 
 class Oscillator : public AudioNode {

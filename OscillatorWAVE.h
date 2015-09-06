@@ -1,8 +1,6 @@
 #pragma once
 
 #include <Oscillator.h>
-#include <AudioNodeInput.h>
-#include <AudioNodeOutput.h>
 #include <stdint.h>
 
 enum WaveformType {
@@ -38,7 +36,7 @@ public:
 	uint16_t _indx;
 
 	AudioNodeOutput* AudioOut;
-	AudioNodeInput WaveformIn;	
+	AudioNodeInput* WaveformIn;	
 protected:
 
 };

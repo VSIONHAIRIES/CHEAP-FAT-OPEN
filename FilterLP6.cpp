@@ -1,4 +1,5 @@
 #include "FilterLP6.h"
+#include <Arduino.h>
 
 const int64_t filterCoefficient[] = {
 	#include <filterCoefficients_1poleLP.inc>
@@ -6,6 +7,9 @@ const int64_t filterCoefficient[] = {
 
 
 FilterLP6::FilterLP6() : Filter() {
+	AudioIn = new AudioNodeInput();
+	CutoffIn = new AudioNodeInput();
+	AudioOut = new AudioNodeOutput(this, &_audioOut);
 
 	_a0 = 0;
 	_a1 = 0;
@@ -20,12 +24,13 @@ FilterLP6::FilterLP6() : Filter() {
 	_cutoffModAmount = 0;
 }
 
-void FilterLP6::process(int& sample) {
+void FilterLP6::process() {
+	// Serial.println("FilterLP6 process() running");
 
-	int v;
-	AudioIn.process(v);
-	_x0 = v;
-	// Cutoff.process(_cutoff);
+	AudioIn->process(_audioIn);
+	_x0 = _audioIn;
+	// CutoffIn->process(_cutoffIn);
+	// _cutoff = _cutoffIn;
 	// CutoffModAmount.process(_cutoffModAmount);
 	// CutoffModSource.process(_cutoffModSource);
 
@@ -42,8 +47,6 @@ void FilterLP6::process(int& sample) {
     // _sample = (_a0 * _x0 + _b1 * _y1) >> 32;
     // _y1 = _sample;
 
-	_sample = _x0;
-	sample = _sample;
-
+	_audioOut = _x0;
 
 }

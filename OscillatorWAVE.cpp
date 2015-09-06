@@ -18,7 +18,7 @@ void OscillatorWAVE::process() {
 	_osc = waveTable[_indx + _waveform];
 	_osc -= 128; // make wavetables signed
 	_osc <<= 24;
-	_osc = int((int64_t(_osc) * int64_t(_gain)) >> 32);
+	_osc = int((int64_t(_osc) * int64_t(_gain)) >> 31);
 }
 
 void OscillatorWAVE::setWaveform(uint8_t waveform) {

@@ -8,14 +8,18 @@ public:
 	FilterLP6();
 	~FilterLP6(){}
 
-	void process(int& sample) override;
+	void process() override;
 
-    AudioNodeInput AudioIn;
-	AudioNodeInput Cutoff;
-	AudioNodeInput CutoffModAmount;
-	AudioNodeInput CutoffModSource;
+    AudioNodeInput* AudioIn;
+	AudioNodeInput* CutoffIn;
+
+	AudioNodeOutput* AudioOut;
 
 protected:
+
+	int _audioIn;
+	int _audioOut;
+	int _cutoffIn;
 
 	int64_t _a0;
 	int64_t _a1;

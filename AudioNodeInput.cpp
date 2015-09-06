@@ -9,8 +9,8 @@ void AudioNodeInput::process(int& sample) {
 	_value = 0;
 	if(_input != NULL) {
 		_input->process(_value);
-		if(_value > 0x7FFFFFFF) _value = 0x7FFFFFFF; //truncate to upper limit of 32bit signed integers
-		else if(_value < -0x80000000) _value = -0x80000000; //truncate to lower limit of 32bit signed integers
+		// if(_value > 0x7FFFFFFF) _value = 0x7FFFFFFF; //truncate to upper limit of 32bit signed integers
+		// else if(_value < -0x80000000) _value = -0x80000000; //truncate to lower limit of 32bit signed integers
 	}
 	sample = _value;
 }

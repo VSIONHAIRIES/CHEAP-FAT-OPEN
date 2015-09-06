@@ -1,4 +1,5 @@
 #include <AudioNode.h>
+#include <AudioContext.h>
 #include <algorithm>
 
 #include <Arduino.h>
@@ -15,7 +16,7 @@ AudioNode::~AudioNode() {
 
 
 bool AudioNode::shouldProcess() {
-	uint64_t clock = _audioCxt->sampleClock();
+	uint64_t clock = _audioCtx->sample_clock();
 	if (_clock < clock) {
 		_clock = clock;
 		return true;

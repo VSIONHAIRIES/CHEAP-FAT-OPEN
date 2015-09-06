@@ -20,7 +20,8 @@ public:
 
 	virtual void process(int& sample) {}
 	virtual void process() {}
-	virtual void shouldProcess();	
+	
+	virtual bool shouldProcess();	
 
 	virtual int nbr_inputs(); 
 	virtual int nbr_outputs();

@@ -1,19 +1,15 @@
 #include "OscillatorPWM.h"
 
 OscillatorPWM::OscillatorPWM(): Oscillator() {
-
-	_pwm = 4675342;
+	AudioOut = new AudioNodeOutput(this, &_osc);
+	_pwm = 0;
 }
 
 
-void OscillatorPWM::process(int64_t& sample) {
-	_phase = _phase + (_period - _phase) / _portamento;
-	_accumulator = _accumulator + _phase;
-	if(_accumulator < _pwm) _osc = 32767;
-	else _osc = -32768;
-	_sample = (_osc * _gain);  	
-	_sample >>= 16;
-	sample = _sample;
-
+void OscillatorPWM::process() {
+	accumulator();
+	if(_accumulator < _pwm) _osc = 0x7FFFFFFF;
+	else _osc = -0x80000000;
+	_osc = int((_int64_t(_osc) * int64_t(_gain)) >> 32);
 }
 

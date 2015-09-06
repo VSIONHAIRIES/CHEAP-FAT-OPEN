@@ -1,8 +1,7 @@
 #pragma once
 
-// http://www.w3.org/TR/webaudio/#AudioNode-section
-
 #include <vector>
+#include <stddef.h>
 #include <stdint.h>
 
 class AudioNode {
@@ -14,7 +13,8 @@ public:
 	virtual void connect(AudioNode* destination);
 	virtual void disconnect(AudioNode* destination);
 
-	virtual void process(int64_t& sample) = 0;
+	virtual void process(int& sample) {}
+	virtual void process() {}
 
 	virtual int nbr_inputs(); 
 	virtual int nbr_outputs();
@@ -26,4 +26,6 @@ protected:
 	
 	std::vector<AudioNode*> _node_inputs;
 	std::vector<AudioNode*> _node_outputs;
+
+	int _sample;
 };

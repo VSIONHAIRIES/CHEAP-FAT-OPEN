@@ -24,10 +24,10 @@ void AudioDestinationNode_T3DAC::isr(void) {
 
 	// Serial.println("enter isr");
 
-	_sample += 32768;
-	analogWrite(A14, _sample>>4);
+	_outputSample += 0x7FFFFFFF; // upper limit of signed 32bit integer to bring it into unsigned int space.
+	analogWrite(A14, _outputSample>>20);
 
-	_sample = 0;
+	_outputSample = 0;
 
 	// http://fastcpp.blogspot.nl/2011/03/fast-iteration-over-stl-vector-elements.html
 	const int n = _node_inputs.size();
@@ -35,7 +35,7 @@ void AudioDestinationNode_T3DAC::isr(void) {
 	AudioNode** ptr = &_node_inputs.front();
 	for(int i = 0; i < n; i++) {
 		ptr[i]->process(_accum);
-		_sample += _accum;
+		_outputSample += _accum;
 	}
 
 	// for(unsigned int i = 0; i < _node_inputs.size(); i++) {

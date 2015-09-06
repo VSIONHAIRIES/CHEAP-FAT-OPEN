@@ -28,11 +28,11 @@ public:
 	OscillatorWAVE();
 	~OscillatorWAVE(){}
 
-	void process(int64_t& sample) override;
+	void process() override;
 
-	void setWaveForm(uint8_t waveform);
+	void setWaveform(uint8_t waveform);
 
-	uint16_t _waveForm;
+	uint16_t _waveform;
 	uint16_t _indx;
 	
 };

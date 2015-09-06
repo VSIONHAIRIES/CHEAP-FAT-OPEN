@@ -9,9 +9,9 @@ public:
 	OscillatorPWM();
 	~OscillatorPWM(){}
 
-	void process(int64_t& sample) override;
+	void process() override;
 
-	int32_t _pwm;
+	int _pwm;
 
 protected:
 

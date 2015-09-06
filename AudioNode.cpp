@@ -9,7 +9,10 @@ AudioNode::~AudioNode() {
 	}
 	_node_inputs.clear();
 	_node_outputs.clear();
+
+	_sample = 0;
 }
+
 
 void AudioNode::connect(AudioNode* destination) {
 	if(std::find(_node_outputs.begin(), _node_outputs.end(), destination) == _node_outputs.end()) {
@@ -17,6 +20,7 @@ void AudioNode::connect(AudioNode* destination) {
 		destination->hook(this);
 	}
 }
+
 
 void AudioNode::disconnect(AudioNode* destination) {
 	_node_outputs.erase(std::remove(_node_outputs.begin(), _node_outputs.end(), destination), _node_outputs.end());
@@ -28,6 +32,7 @@ int AudioNode::nbr_inputs() {
 	return _node_inputs.size();
 }
 
+
 int AudioNode::nbr_outputs() {
 	return _node_outputs.size();
 }
@@ -38,6 +43,7 @@ void AudioNode::hook(AudioNode* input) {
 		_node_inputs.push_back(input);
 	}
 }
+
 
 void AudioNode::unhook(AudioNode* destination) {
 	_node_inputs.erase(std::remove(_node_inputs.begin(), _node_inputs.end(), destination), _node_inputs.end());

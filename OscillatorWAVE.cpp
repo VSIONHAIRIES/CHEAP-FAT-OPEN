@@ -6,24 +6,22 @@ const uint8_t waveTable[] = {
 };
 
 OscillatorWAVE::OscillatorWAVE(): Oscillator() {
-	_waveForm = 0;
+	AudioOut = new AudioNodeOutput(this, &_osc);
+	_waveform = 0;
 }
 
 
-void OscillatorWAVE::process(int64_t& sample) {
-	_phase = _phase + (_period - _phase) / _portamento;
-	_accumulator = _accumulator + _phase;
+void OscillatorWAVE::process() {
+	accumulator();
 	_indx = _accumulator >> 24;
-	_indx += 128; 
-	_osc = waveTable[_indx + _waveForm];
-	_osc -= 128;
-	_osc <<= 8;
-	_sample = (_osc * _gain);  	
-	_sample >>= 16;
-	sample = _sample;
+	_indx += 128; // make wavetables signed
+	_osc = waveTable[_indx + _waveform];
+	_osc -= 128; // make wavetables signed
+	_osc <<= 24;
+	_osc = int((_int64_t(_osc) * int64_t(_gain)) >> 32);
 }
 
-void OscillatorWAVE::setWaveForm(uint8_t waveform) {
-	if(waveform < 16) _waveForm = waveform<<8;
+void OscillatorWAVE::setWaveform(uint8_t waveform) {
+	if(waveform < 16) _waveform = waveform<<8;
 }
 

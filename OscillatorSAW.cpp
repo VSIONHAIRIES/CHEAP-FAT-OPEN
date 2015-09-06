@@ -1,18 +1,13 @@
 #include "OscillatorSAW.h"
-#include <Arduino.h>
+
+
 
 OscillatorSAW::OscillatorSAW(): Oscillator() {
+	AudioOut = new AudioNodeOutput(this, &_osc);
 }
 
-
-void OscillatorSAW::process(int64_t& sample) {
-	_phase = _phase + (_period - _phase) / _portamento;
-	_accumulator = _accumulator + _phase;
-	_osc = _accumulator >> 16;
-	// _osc -= 32767;
-
-	_sample = (_osc * _gain);  	
-	_sample >>= 16;
-	sample = _sample;
+void OscillatorSAW::process() {
+	accumulator();
+	_osc = int((_int64_t(accumulator) * int64_t(_gain)) >> 32);
 }
 

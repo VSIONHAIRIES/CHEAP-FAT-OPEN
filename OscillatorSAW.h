@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Oscillator.h>
+#include <AudioNodeInput.h>
+#include <AudioNodeOutput.h>
 #include <stdint.h>
 
 class OscillatorSAW : public Oscillator {
@@ -9,6 +11,9 @@ public:
 	OscillatorSAW();
 	~OscillatorSAW(){}
 
-	void process(int64_t& sample) override;
+	void process() override;
+
+	// AudioNodeInput Frequency;
+	AudioNodeOutput* AudioOut;
 	
 };

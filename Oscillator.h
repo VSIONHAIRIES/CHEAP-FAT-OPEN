@@ -9,6 +9,8 @@ public:
 	Oscillator();
 	virtual ~Oscillator(){}
 
+	void accumulator();
+
 	// FREQUENCY AND DETUNE FUNCTIONS
 	void setFrequency(float frequency);
 	void inline setFrequency();
@@ -23,21 +25,16 @@ public:
 
 protected:
 
-	float 			_freq;
-	float 			_detune;
-	float			_semi;
-	float			_bend;
-	int32_t 		_portamento;
-	uint16_t		_gain;
+	float 		_freq;
+	float 		_detune;
+	float		_semi;
+	float		_bend;
+	int32_t 	_portamento;
+	int			_gain;
 
-	int32_t 		_period;
-	int32_t			_phase;
-	int32_t			_osc;	
-	int32_t 		_accumulator;
-	int32_t			_index;
-	int64_t			_sample;
-
-	bool			_processing = false;
-
+	int 		_period;
+	int			_phase;
+	int 		_accumulator;
+	int			_osc;	
 	
 };

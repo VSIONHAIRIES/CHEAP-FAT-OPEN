@@ -10,16 +10,20 @@ public:
 
 	void process() override;
 
-    AudioNodeInput* AudioIn;
-	AudioNodeInput* CutoffIn;
+ //    AudioNodeInput* AudioIn;
+	// AudioNodeInput* CutoffIn;
+	// AudioNodeInput* CutoffModSourceIn;
+	// AudioNodeInput* CutoffModAmountIn;
 
-	AudioNodeOutput* AudioOut;
+	// AudioNodeOutput* AudioOut;
 
 protected:
 
-	int _audioIn;
-	int _audioOut;
-	int _cutoffIn;
+	// int _audioIn;
+	// int _audioOut;
+	// int _cutoffIn;
+	// int _cutoffModSourceIn;
+	// int _cutoffModAmountIn;
 
 	int64_t _a0;
 	int64_t _a1;
@@ -29,7 +33,7 @@ protected:
     int64_t _x1;
     int64_t _y0;
     int64_t _x0;
-    int64_t _cutoffModSource;
-    int64_t _cutoffModAmount;
+    // int64_t _cutoffModSource;
+    // int64_t _cutoffModAmount;
 	
 };

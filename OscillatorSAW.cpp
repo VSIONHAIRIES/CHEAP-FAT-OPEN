@@ -1,6 +1,4 @@
 #include "OscillatorSAW.h"
-#include <Arduino.h>
-
 
 OscillatorSAW::OscillatorSAW(): Oscillator() {
 	AudioOut = new AudioNodeOutput(this, &_osc);

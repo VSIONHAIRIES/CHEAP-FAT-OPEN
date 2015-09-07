@@ -2,8 +2,6 @@
 #include <AudioContext.h>
 #include <algorithm>
 
-#include <Arduino.h>
-
 AudioNode::~AudioNode() {
 	for(unsigned int i = 0; i < _node_inputs.size(); i++) {
 		_node_inputs[i]->unhook(this);

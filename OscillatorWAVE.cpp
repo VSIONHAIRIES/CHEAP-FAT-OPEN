@@ -1,5 +1,4 @@
 #include "OscillatorWAVE.h"
-#include <Arduino.h>
 
 const uint8_t waveTable[] = { 
 	#include <waveTable8bit.inc>

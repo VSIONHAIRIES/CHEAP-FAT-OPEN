@@ -1,7 +1,5 @@
 #include <AudioDestinationNode_T3DAC.h>
 
-#include <Arduino.h>
-
 #define SAMPLE_RATE 48000
 #define CPU_FREQ 96 // in MHz
 

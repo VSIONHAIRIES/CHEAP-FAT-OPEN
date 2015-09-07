@@ -1,6 +1,6 @@
 #include "AudioContext.h"
-
 #include "AudioDestinationNode_T3DAC.h"
+#include <Arduino.h>
 
 AudioDestinationNode_T3DAC t3dac_destinationNode;
 

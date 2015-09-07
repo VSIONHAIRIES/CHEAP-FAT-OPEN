@@ -11,7 +11,6 @@ public:
 
 	void process() override;
 
-	// AudioNodeInput Frequency;
 	AudioNodeOutput* AudioOut;
 	
 };

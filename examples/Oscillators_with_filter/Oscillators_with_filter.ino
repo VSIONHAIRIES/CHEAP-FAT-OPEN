@@ -5,13 +5,14 @@
 #include <FilterLP6.h>
 
 AudioContext audioCtx;
+OscillatorSAW* saw0 = new OscillatorSAW();
 OscillatorWAVE* wave0 = new OscillatorWAVE();
 OscillatorWAVE* wave1 = new OscillatorWAVE();
 OscillatorPWM* pwm0 = new OscillatorPWM();
 FilterLP6* fltr0 = new FilterLP6();
 
 void setup() {
-  cli();  
+  cli();
   wave0->AudioOut->connect(fltr0->CutoffIn);
   wave1->AudioOut->connect(pwm0->PWMIn);
   pwm0->AudioOut->connect(fltr0->AudioIn);

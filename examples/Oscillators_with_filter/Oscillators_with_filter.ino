@@ -13,6 +13,7 @@ FilterLP6* fltr0 = new FilterLP6();
 void setup() {
 //  pwm0->setGain(0.50);
   cli();
+  
   wave0->AudioOut->connect(fltr0->CutoffIn);
   wave1->AudioOut->connect(pwm0->PWMIn);
   pwm0->AudioOut->connect(fltr0->AudioIn);
@@ -26,7 +27,7 @@ void loop() {
   
   float pot0 = analogRead(A0);
   float pot1 = analogRead(A1);
-
+  
   wave0->setWaveform(TRIANGLE);
   wave0->setFrequency(pot0 / 64.0);
   wave0->setGain(pot1 / 1024.0f);

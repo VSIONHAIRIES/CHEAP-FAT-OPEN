@@ -4,8 +4,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define BIT_32 4294967296
 #define SIGNED_BIT_32_HIGH 2147483647
-#define SIGNED_BIT_32_LOW -2147483648
+#define SIGNED_BIT_32_LOW -2147483647
 #define UNSIGNED_BIT_32_HIGH 4294967295
 #define UNSIGNED_BIT_32_LOW 0 
 

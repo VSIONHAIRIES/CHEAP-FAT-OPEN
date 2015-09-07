@@ -4,8 +4,6 @@
 #include <AudioNodeInput.h>
 #include <AudioNodeOutput.h>
 
-#define BIT_32 4294967296
-
 class Filter : public AudioNode {
 public:
 

@@ -18,6 +18,9 @@ public:
 	// hence -- knob0->ValueOut->connect(fltr0->CutoffIn);
 	// becomes - knob0->connect(fltr0->CutoffIn);
 	// and would have the same functionality
+	// yet through AudioNode we could connect more outputs (without needing a demux)
+	// knob0->connect(fltr0->CutoffIn);
+	// knob0->connect(pwm0->PWMIn);
 
 	// the same comment goes to all the AudioOut and AudioIn defined in other files
 	// i.e: AudioOut and AudioIn functionality is already there through AudioNode
@@ -29,6 +32,10 @@ public:
 	//
 	// or -- pwm0->AudioOut->connect(fltr0->AudioIn);
 	// becomes -- pwm0->connect(fltr0);	
+	//
+	// or with multiple outputs
+	// wave0->connect(fltr0->CutoffModSourceIn);
+	// wave0->connect(pwm);
 
 	// for this particular InputDevice class there's no need for it to be an 
 	// AudioNode per se if it has an AudioNodeOutput* ValueOut member, since these 

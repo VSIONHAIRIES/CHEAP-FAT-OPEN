@@ -35,6 +35,8 @@ public:
 	virtual void hook(AudioNode* input);
 	virtual void unhook(AudioNode* input);
 
+	virtual int convertFloatInput(float value);
+
 protected:
 	
 	AudioContext*	_audioCtx;

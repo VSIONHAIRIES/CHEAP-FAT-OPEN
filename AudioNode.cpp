@@ -57,3 +57,11 @@ void AudioNode::hook(AudioNode* input) {
 void AudioNode::unhook(AudioNode* destination) {
 	_node_inputs.erase(std::remove(_node_inputs.begin(), _node_inputs.end(), destination), _node_inputs.end());
 }
+
+
+int AudioNode::convertFloatInput(float value) {
+	int64_t v = int64_t(value * float(SIGNED_BIT_32_HIGH));
+	if(v > SIGNED_BIT_32_HIGH) v = SIGNED_BIT_32_HIGH;
+	if(v < SIGNED_BIT_32_LOW) v = SIGNED_BIT_32_LOW;
+	return int(v);
+}

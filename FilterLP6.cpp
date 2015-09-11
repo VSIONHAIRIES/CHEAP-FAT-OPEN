@@ -32,7 +32,7 @@ void FilterLP6::process() {
 	c += SIGNED_BIT_32_HIGH;
 
 
-    _b1 = filterCoefficient[c>>24]; // we're only taking c back 23, as there is 
+    _b1 = filterCoefficient[c>>24]; 
     _a0 = BIT_32 - _b1;
     
     _y0 = (_a0 * _x0 + _b1 * _y1) >> 32;

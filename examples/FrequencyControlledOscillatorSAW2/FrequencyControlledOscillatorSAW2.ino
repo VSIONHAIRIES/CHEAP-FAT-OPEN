@@ -1,0 +1,35 @@
+#include <AudioContext.h>
+#include <InputDevice.h>
+#include <OscillatorSAW.h>
+#include <OscillatorWAVE.h>
+//#include <FilterLP6.h>
+
+AudioContext audioCtx;
+InputDevice* knob0 = new InputDevice();
+InputDevice* knob1 = new InputDevice();
+OscillatorSAW* saw0 = new OscillatorSAW();
+OscillatorWAVE* wave0 = new OscillatorWAVE();
+//FilterLP6* fltr0 = new FilterLP6();
+
+void setup() {
+  cli();
+  knob0->ValueOut->connect(saw0->FrequencyIn);
+  knob1->ValueOut->connect(saw0->FMAmountIn);
+  wave0->AudioOut->connect(saw0->FMSourceIn);
+  saw0->AudioOut->connect(audioCtx.destination());
+//  fltr0->AudioOut->connect(audioCtx.destination());
+
+  sei();  
+}
+
+void loop() {
+  
+  int pot0 = analogRead(A0);
+  int pot1 = analogRead(A1);
+  knob0->setValue10bit(pot0);
+  knob1->setValue10bit(pot1);
+
+  wave0->setWaveform(SAW);
+  wave0->setFrequency(0.1);
+    
+}

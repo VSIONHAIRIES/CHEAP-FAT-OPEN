@@ -21,16 +21,22 @@ public:
 	// FREQUENCY AND DETUNE FUNCTIONS
 	void setFrequency(float frequency);
 	void inline setFrequency();
-	void setFrequencyInt32();
-	void setExpFrequencyInt32(int freqIndex);
+
 	void setSemitone(int8_t semi);
 	void setDetune(float detune);
 	void setBend(float bend);
 	void setPortamento(int32_t port);
 	
+	void getExpFrequency();
+	void setExpFrequencyInt32(int freqIndex);
+
 	// GAIN FUNCTIONS
 	void setGain(float value); // 0.0 - 1.0
-	float getGain();       // 0.0 - 1.0         
+	float getGain();       // 0.0 - 1.0
+
+	AudioNodeInput* FrequencyIn;
+	AudioNodeInput* FMSourceIn;
+	AudioNodeInput* FMAmountIn;
 
 protected:
 
@@ -57,6 +63,12 @@ protected:
 	int64_t		_dfreq;
 	int64_t 	_ffrac;
 	int 		_dPhase;
+
+	int _frequencyIn;
+	int _fmSourceIn;
+	int _fmAmountIn;
+
+
 	
 
 };

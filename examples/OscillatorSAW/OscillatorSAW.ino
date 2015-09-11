@@ -30,6 +30,6 @@ void loop() {
   knob1->setValue10bit(pot1);
 
   wave0->setWaveform(SAW);
-  wave0->setFrequency(0.1);
+  wave0->setFrequency(2.0);
     
 }

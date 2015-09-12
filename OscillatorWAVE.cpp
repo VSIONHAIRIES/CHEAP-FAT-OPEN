@@ -11,7 +11,7 @@ OscillatorWAVE::OscillatorWAVE(): Oscillator() {
 
 
 void OscillatorWAVE::process() {
-	accumulator();
+	getExpFrequency();
 	_indx = _accumulator >> 24;
 	_indx += 128; // make wavetables signed
 	_osc = waveTable[_indx + _waveform];

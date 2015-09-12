@@ -26,8 +26,16 @@ Oscillator::Oscillator() : AudioNode() {
 	// this extends the standard midi frequencies from 128 to 256 discrete values,
 	// extending the frequency range with -117 positions below to 0.00949 Hz
 	// and +11 above to 23679 Hz.
-	for (int i=0; i<=256; i++) {
-		_expFrequency[i] = (int64_t(pow(2,((float(i) - 117.0 - 69.0) / 12.0)) * 440.0) << 32) / SAMPLE_RATE;  // divide by sample rate?
+	for (int i=0; i<=128; i++) {
+		_expFrequency[i] = (int64_t(pow(2,((float(i) - 69.0) / 12.0)) * 440.0) << 32) / SAMPLE_RATE;  // divide by sample rate?
+		// Serial.print("_expFrequency[");
+		// Serial.print(i);
+		// Serial.print("] = ");
+		// Serial.println(int(_expFrequency[i] >> 32));
+	}
+
+	for (int i=0; i<=128; i++) {
+		_lfoFrequency[i] = (int64_t(pow(2,((double(i) - 117.0 - 69.0) / 12.0)) * 440.0) << 32) / SAMPLE_RATE;  // divide by sample rate?
 	}
 
 	_dir = 1;
@@ -38,6 +46,7 @@ Oscillator::Oscillator() : AudioNode() {
 	_dfreq = 0;
 	_ffrac = 0;
 	_dPhase = 0;
+	_lfo = false;
 }
 
 
@@ -56,6 +65,7 @@ void Oscillator::setFrequency(float freq) {
 
 void inline Oscillator::setFrequency() {
 	_period = int(((_freq * _semi * (1 + _detune + _bend)) * PERIOD_MAX) / SAMPLE_RATE);
+	_dPhase = _period;
 	// setFrequencyIbt32();
 }
 
@@ -89,41 +99,46 @@ void Oscillator::getExpFrequency() {
 
 	_indx = indx >> 24;  // take it down to the range 0-127
 	_ifrac = indx - (_indx << 24);	// find the remainder in the indx after substracting the _indx for the array.
-	_indx += (128 - 11);  // bring _indx into range 128 - 255 where the audible frequencies lie. // change this for LFO?
 
-	_freq0 = _expFrequency[_indx];
-	_freq1 = _expFrequency[_indx + 1];
-	_dfreq = _freq1 - _freq0;
-	_ffrac = (_ifrac * _dfreq) >> 24;
-	_freq0 += _ffrac;
-
-	// _dPhase = (_freq0 / SAMPLE_RATE) * _dir;
-	_dPhase = _freq0 * _dir;
-
-}
-
-
-void Oscillator::setExpFrequencyInt32(int indx) {	// takes an int between 0 and SIGNED_BIT_32_HIGH
-	_dir = 1;
-	if(indx < 0) {
-		indx = -indx;
-		_dir = -1;
+	// if(!_lfo) _indx += (128 - 11);  // bring _indx into range 128 - 255 where the audible frequencies lie. // change this for LFO?
+	if(_lfo) {
+		_freq0 = _lfoFrequency[_indx];
+		_freq1 = _lfoFrequency[_indx + 1];		
+	} else {
+		_freq0 = _expFrequency[_indx];
+		_freq1 = _expFrequency[_indx + 1];
 	}
-	if(indx > SIGNED_BIT_32_HIGH) indx = SIGNED_BIT_32_HIGH;
 
-	_indx = indx >> 24;  // take it down to the range 0-127
-	_ifrac = indx - (_indx << 24);	// find the remainder in the indx after substracting the _indx for the array.
-	_indx += (128 - 11);  // bring _indx into range 128 - 255 where the audible frequencies lie. // change this for LFO?
-
-	_freq0 = _expFrequency[_indx];
-	_freq1 = _expFrequency[_indx + 1];
 	_dfreq = _freq1 - _freq0;
 	_ffrac = (_ifrac * _dfreq) >> 24;
 	_freq0 += _ffrac;
 
-	_dPhase = (_freq0 / SAMPLE_RATE) * _dir;
-
+	_dPhase = _freq0 * _dir;
+	_accumulator += _dPhase;
 }
+
+
+// void Oscillator::setExpFrequencyInt32(int indx) {	// takes an int between 0 and SIGNED_BIT_32_HIGH
+// 	_dir = 1;
+// 	if(indx < 0) {
+// 		indx = -indx;
+// 		_dir = -1;
+// 	}
+// 	if(indx > SIGNED_BIT_32_HIGH) indx = SIGNED_BIT_32_HIGH;
+
+// 	_indx = indx >> 24;  // take it down to the range 0-127
+// 	_ifrac = indx - (_indx << 24);	// find the remainder in the indx after substracting the _indx for the array.
+// 	_indx += (128 - 11);  // bring _indx into range 128 - 255 where the audible frequencies lie. // change this for LFO?
+
+// 	_freq0 = _expFrequency[_indx];
+// 	_freq1 = _expFrequency[_indx + 1];
+// 	_dfreq = _freq1 - _freq0;
+// 	_ffrac = (_ifrac * _dfreq) >> 24;
+// 	_freq0 += _ffrac;
+
+// 	_dPhase = (_freq0 / SAMPLE_RATE) * _dir;
+
+// }
 
 
 

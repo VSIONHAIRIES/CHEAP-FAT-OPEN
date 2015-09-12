@@ -38,9 +38,13 @@ public:
 	AudioNodeInput* FMSourceIn;
 	AudioNodeInput* FMAmountIn;
 
+	bool		_lfo;
+
 protected:
 
 	int64_t		_expFrequency[256];
+	int64_t		_lfoFrequency[256];
+
 
 	float 		_freq;
 	float 		_detune;

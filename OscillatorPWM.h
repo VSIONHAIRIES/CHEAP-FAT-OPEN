@@ -11,11 +11,14 @@ public:
 
 	void process() override;
 
-	int _pwm;
-
 	AudioNodeOutput* AudioOut;
-	AudioNodeInput* PWMIn;
+	AudioNodeInput* PWMSourceIn;
+	AudioNodeInput* PWMAmountIn;
 
 protected:
+
+	int64_t _pwm;
+	int _pwmSourceIn;
+	int _pwmAmountIn;
 
 };

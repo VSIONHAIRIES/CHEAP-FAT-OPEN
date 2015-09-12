@@ -12,9 +12,4 @@ public:
 	void process() override;
 
 	AudioNodeOutput* AudioOut;
-
-protected:
-
-	// int _frequencyIn;
-
 };

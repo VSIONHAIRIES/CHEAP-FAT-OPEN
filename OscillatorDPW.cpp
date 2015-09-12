@@ -13,23 +13,18 @@ OscillatorDPW::OscillatorDPW(): Oscillator() {
 
 void OscillatorDPW::process() {
 	getExpFrequency();
-	_accumulator += _dPhase;
-	// _x0 = _accumulator;
-//	_period = int(((_freq * _semi * (1 + _detune + _bend)) * PERIOD_MAX) / SAMPLE_RATE);
-
 
 	_x0 = (int64_t(_accumulator) * int64_t(_accumulator)) >> 31;
 	_y0 = _x0 - _z1;
-	// _y0 = ((_x0 - _z1) * (_x0 + _z1)) >> 1;
+	// _y0 = ((_x0 - _z1) * (_x0 + _z1)) >> 1;  //didn't work
 	_z1 = _x0;
-	_f0 = _freq0 * SAMPLE_RATE;  // placeholder, develop a way of getting the 
-	// if(_f0 == 0) _f0 = 1;
-	_f0 = (_f0 * ((BIT_32 - _dPhase) >> 16)) >> 16;
+	_f0 = _freq0 * SAMPLE_RATE; 
+	// if(_f0 == 0) _f0 = 1;  // not needed?
+	_f0 = (_f0 * ((BIT_32 - _dPhase) >> 16)) >> 16;  // may not be needed
 	_c = _fs / _f0;
-	// _cprint = _c;
 	_y0 = (_y0 * _c) >> 2;
-	_osc = _y0;
-	// _osc = SIGNED_BIT_32_HIGH - _accumulator;
-	// _osc = int((int64_t(_accumulator) * int64_t(_gain)) >> 31);
+ 	_osc = _y0;
+	// _osc = SIGNED_BIT_32_HIGH - _y0;
+	_osc = int((int64_t(_osc) * int64_t(_gain)) >> 31);
 }
 
